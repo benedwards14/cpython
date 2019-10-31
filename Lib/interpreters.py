@@ -1,7 +1,7 @@
 """Subinterpreters High Level Module."""
 
 import _interpreters
-import logger
+import logging
 
 __all__ = ['Interpreter', 'SendChannel', 'RecvChannel', 'is_shareable',
            'create_channel', 'list_all_channels', 'list_all', 'get_current',
@@ -39,7 +39,7 @@ class Interpreter:
         try:
             _interpreters.run_string(self.id, src_str)
         except RunFailedError as err:
-            logger.error(err)
+            logging.error(err)
             raise
 
 def wait(self, timeout):
@@ -99,15 +99,15 @@ class RecvChannel:
     def release(self):
         """ release()
 
-        No longer associate the current interpreterwith the channel
+        No longer associate the current interpreter with the channel
         (on the sending end).
         """
-        return _interpreters.(self.id)
+        return _interpreters.channel_release(self.id)
 
     def close(self, force=False):
         """close(force=False)
 
-        Close the channel in all interpreters..
+        Close the channel in all interpreters.
         """
         return _interpreters.channel_close(self.id, force)
 
