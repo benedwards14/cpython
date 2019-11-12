@@ -42,7 +42,7 @@ class Interpreter:
             logging.error(err)
             raise
 
-def wait(self, timeout):
+def wait(timeout):
     #The implementation for wait
     # will be non trivial to be useful
     import time
@@ -68,9 +68,6 @@ class RecvChannel:
         if obj == None:
             wait(timeout)
             obj = obj = _interpreters.channel_recv(self.id)
-
-        # Pending: See issue 52 on multi-core python project
-        associate_interp_to_channel(interpId, Cid)
 
         return obj
 
@@ -126,7 +123,6 @@ class SendChannel:
         """
         obj = _interpreters.channel_send(self.id, obj)
         wait(2)
-        associate_interp_to_channel(interpId, Cid)
 
     def send_nowait(self, obj):
         """ send_nowait(obj)
