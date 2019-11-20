@@ -55,7 +55,10 @@ class RecvChannel:
 
     def __init__(self, id):
         self.id = id
-        self.interpreters = _interpreters.list_all()
+
+    @property
+    def interpreters(self):
+        return _interpreters.channel_list_interpreters(self.id, recv=True)
 
     def recv(self, timeout=2):
         """ channel_recv() -> obj
@@ -113,7 +116,10 @@ class SendChannel:
 
     def __init__(self, id):
         self.id = id
-        self.interpreters = _interpreters.list_all()
+
+    @property
+    def interpreters(self):
+        return _interpreters.channel_list_interpreters(self.id, send=True)
 
     def send(self, obj):
         """ send(obj)
